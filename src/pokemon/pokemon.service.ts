@@ -9,6 +9,7 @@ import { isValidObjectId, Model } from 'mongoose';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 import { Pokemon } from './entities/pokemon.entity';
+import { PaginationDto } from '../common/dto/pagination.dto';
 
 @Injectable()
 export class PokemonService {
@@ -27,7 +28,18 @@ export class PokemonService {
     }
   }
 
-  async findAll() {
+  async findAll(pagination: PaginationDto) {
+    const { limit = 10, offset = 0 } = pagination;
+    const pokemons = await this.pokemonModel
+      .find()
+      .limit(limit)
+      .skip(offset)
+      .sort({ no: 1 })
+      .select('-__v');
+    return pokemons;
+  }
+
+  async findPaginated() {
     const pokemons = await this.pokemonModel.find();
     return pokemons;
   }
@@ -74,6 +86,18 @@ export class PokemonService {
       throw new BadRequestException(`Pokemon with id ${id} doest not exist`);
     }
     return;
+  }
+
+  async deleteBulk() {
+    await this.pokemonModel.deleteMany({});
+  }
+
+  async createBulk(insertData: CreatePokemonDto[]) {
+    try {
+      await this.pokemonModel.insertMany(insertData);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   private handleExceptions(error: any) {

@@ -46,6 +46,13 @@ Run local database with
 docker-compose up -d
 ```
 
+Populate local database
+
+```bash
+# GET request to populate 650 pokemons
+[GET] http://localhost:3000/api/seed
+```
+
 and run the app
 
 ```bash
