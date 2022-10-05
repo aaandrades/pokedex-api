@@ -46,18 +46,25 @@ Run local database with
 docker-compose up -d
 ```
 
-Populate local database
+Clone the file **.env.template** and rename to **.env**
 
 ```bash
-# GET request to populate 650 pokemons
-[GET] http://localhost:3000/api/seed
+# Replace with the correct values
+MONGODB="correct-database-connection"
 ```
 
-and run the app
+Run the app
 
 ```bash
 # Development
 npm run start:dev
+```
+
+And populate local database
+
+```bash
+# GET request to populate 650 pokemons
+[GET] http://localhost:3000/api/seed
 ```
 
 _If you want to contribute to improve the project, please create your PR and write me :speech_balloon: . After it, sit down and take a beer, you deserve it!_ :beers: .
