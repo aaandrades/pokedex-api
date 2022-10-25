@@ -67,5 +67,23 @@ And populate local database
 [GET] http://localhost:3000/api/seed
 ```
 
+# Notes
+
+## Production build
+
+1. Create `.env.prod`
+2. Fill the envioment variables
+3. Build the image
+
+```
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
+```
+
+## Running
+
+```
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up
+```
+
 _If you want to contribute to improve the project, please create your PR and write me :speech_balloon: . After it, sit down and take a beer, you deserve it!_ :beers: .
 _This project is for academic purposes only, all rights reserved. Andrés Andrade 2022 :copyright::registered:_
